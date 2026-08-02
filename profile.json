@@ -1,0 +1,162 @@
+{
+  "name": "JAY PANCHAL",
+  "phone": "+1 (437) 430-5325",
+  "city": "Toronto, ON",
+  "email": "panchaljay0808@gmail.com",
+  "linkedin_url": "https://www.linkedin.com/in/jaypanchal0808",
+  "github_url": "https://github.com/jayp881998",
+  "default_title": "Data & BI Analyst",
+  "default_summary": "Data and BI analyst with a mechanical-engineering foundation and 2.5+ years across the full analytics stack: extracting data via APIs and SQL, modeling it into SQL Server warehouses, and delivering governed Power BI dashboards with DAX. Two Canadian post-graduate credentials, both with honours. Strongest where operations, inventory, and manufacturing meet analytics, combining shop-floor understanding with the ability to build the reporting systems that run on top of it. Comfortable owning a pipeline end to end: ingestion, transformation, warehousing, semantic modeling, dashboarding, automation, UAT, and documentation.",
+  "positioning": "A mechanical engineer turned BI developer who builds the SQL-to-Power BI reporting that operations, inventory, and supply-chain teams run on, fluent in both the production floor and the data model behind it.",
+  "lanes": [
+    "Operations / Inventory / Manufacturing / Supply-Chain Analyst",
+    "BI Developer",
+    "Report Developer",
+    "Data Analyst / Business Intelligence Analyst"
+  ],
+  "differentiators": [
+    [
+      "Production-floor fluency",
+      "Mechanical-engineering degree and SolidWorks experience supporting manufacturing clients; understands what the data actually describes."
+    ],
+    [
+      "Full-stack BI builder",
+      "Builds the whole pipeline (API/SQL extraction to SQL Server warehouse to governed Power BI models), not just the final dashboard."
+    ],
+    [
+      "Honours post-grad credentials",
+      "Two Canadian post-graduate certificates with honours: Data Analytics (Durham) and Project Management (Fleming)."
+    ],
+    [
+      "Modern-stack exposure",
+      "Databricks, PySpark, and Delta Lake through a national datathon."
+    ]
+  ],
+  "competencies": {
+    "BI & Reporting": "Power BI (DAX, Power Query/M, RLS, scheduled refresh, data gateways), SSRS, Tableau, Excel (advanced: pivot tables, lookups, VBA)",
+    "Databases & SQL": "SQL and T-SQL (CTEs, window functions, stored procedures, MERGE/UPSERT, performance tuning), SQL Server Management Studio (SSMS), star-schema warehousing",
+    "Data Engineering": "REST API integration, JSON-to-relational transformation, deduplication, SQL Server Agent and Task Scheduler automation, Databricks (PySpark, Delta Lake), Snowflake, Azure fundamentals",
+    "Data Quality & Governance": "source-to-target validation, reconciliation logic, anomaly detection, KPI governance, data lineage, data dictionaries, runbooks",
+    "Delivery & Tooling": "UAT coordination, test-case writing, defect logging, release notes, Git, Jira, Confluence, Agile/Scrum, Waterfall/PMBOK",
+    "Domain (Operations & Inventory)": "inventory and stock-health analytics, operations and production reporting, supply-chain KPIs, vendor performance analysis",
+    "ERP & Business Systems": "Microsoft Dynamics 365 (migration support: data mapping, validation, user support), ERP data integrity and master-data consistency, business-requirements gathering, process documentation",
+    "Programming & Statistics": "Python (pandas, NumPy, requests, ETL scripting), R; regression, logistic regression, discriminant analysis, regularization, decision trees/random forest, ANOVA, chi-square, hypothesis testing",
+    "Engineering (CAD/PLM)": "SolidWorks (assembly design, part modeling, PDM), AutoCAD, Siemens NX, Ansys, Creo, Catia"
+  },
+  "experience": [
+    {
+      "org": "MVR Cash & Carry",
+      "tag": "current",
+      "role": "Operations & Inventory Analyst",
+      "loc": "North York, ON",
+      "dates": "May 2025 - Present",
+      "bullets": [
+        "Own inventory and stock-health analytics across 1,000+ SKUs, tracking stock levels, expiry, and shrinkage to drive replenishment for 12+ monthly purchase orders; reduced expired inventory by 15%.",
+        "Analyze SKU velocity and vendor performance across 10+ suppliers, recommending product removals and order adjustments that improved shelf efficiency and cut waste.",
+        "Rebuilt weekly reporting from raw MS Access and Excel exports into a consistent stock-health view, giving managers current visibility in place of ad-hoc pulls.",
+        "Supervise a 3-person team across daily operations.",
+        "Support the company's Dynamics 365 migration, contributing operational and data input (data mapping, validation, and user support) to keep master data and inventory accurate through the transition."
+      ]
+    },
+    {
+      "org": "The Michener Institute of Education at UHN",
+      "tag": "previous",
+      "role": "Data Analyst, Systems Integration & Real-Time Analytics",
+      "loc": "Toronto, ON",
+      "dates": "Jul 2024 - Dec 2024",
+      "bullets": [
+        "Built a Python, SQL Server, and Power BI pipeline that replaced approximately 20 hours per week of manual reporting with an automated 45-minute refresh, giving leadership a single source of truth for helpdesk KPIs.",
+        "Engineered Python ingestion of Zendesk's API (pagination, rate-limit retries, checkpointing), processing 5+ years of historical and real-time data with deduplication into a governed star-schema warehouse.",
+        "Modeled a DAX semantic layer surfacing SLA compliance, backlog aging, first-response and resolution time, reopen rate, and agent productivity across 5 dashboards.",
+        "Automated refresh via SQL Server Agent; built data-quality checks, reconciliation, and anomaly detection; led requirements to UAT to release with lineage and refresh-SLA documentation, reducing ad-hoc clarification requests by 30%."
+      ]
+    },
+    {
+      "org": "Group Bayport",
+      "tag": "older",
+      "role": "Data Analyst, Operations & Automation",
+      "loc": "Ahmedabad, India",
+      "dates": "Aug 2021 - Mar 2023",
+      "bullets": [
+        "Sourced and transformed EAV-model SQL data into analysis-ready relational tables and reporting for operations, production, and customer-experience teams across 5 e-commerce brands.",
+        "Standardized KPI definitions, join logic, and filter rules across brands, lifting recurring-report accuracy to 95%+ and reducing month-end rework by 20%.",
+        "Built Excel and Power Query tools and dashboards that surfaced variance drivers and supported clearer monthly operational reviews.",
+        "Automated recurring report delivery with SQL and scheduled jobs, accelerating turnaround and eliminating manual bottlenecks."
+      ]
+    },
+    {
+      "org": "Engineering Technique",
+      "tag": "older",
+      "role": "Application Engineer, SolidWorks VAR",
+      "loc": "Ahmedabad, India",
+      "dates": "Mar 2020 - Mar 2021",
+      "bullets": [
+        "Trained and supported manufacturing clients on SolidWorks (assembly design, part modeling, PDM), diagnosing and resolving design and assembly issues on the production floor.",
+        "Certified SOLIDWORKS Professional and Mechanical Design Expert; standardized client design workflows and improved assembly accuracy."
+      ]
+    },
+    {
+      "org": "Larsen & Toubro (L&T)",
+      "tag": "older",
+      "role": "Mechanical Engineer, Intern",
+      "loc": "Surat, India",
+      "dates": "Dec 2017 - Jan 2018",
+      "bullets": [
+        "Early mechanical-engineering internship within a heavy-engineering environment."
+      ]
+    }
+  ],
+  "projects": [
+    [
+      "211 Canada National Datathon, Data for Good (2025)",
+      "Engineered a Databricks and PySpark Bronze-to-Silver Delta Lake pipeline over 100,000+ mental-health records across 24 datasets and 8 provinces, modeling a fact-dimension schema and delivering Power BI reports for public-health stakeholders."
+    ],
+    [
+      "IT Support Analytics Pipeline (GitHub)",
+      "End-to-end Zendesk to SQL Server to Power BI portfolio build: Python ETL (pagination, rate-limit retries, checkpointing), star-schema warehouse, DAX KPIs, and a 45-minute automated refresh, on sanitized data."
+    ],
+    [
+      "Applied Statistical Modeling (R)",
+      "Regression, logistic regression, discriminant analysis, regularization, and tree/ensemble methods, with a customer-churn capstone."
+    ],
+    [
+      "Fundamentals of Statistical Analysis (R)",
+      "Distributions, hypothesis testing, chi-square, and linear regression on real datasets."
+    ]
+  ],
+  "education": [
+    "Postgraduate Certificate, Data Analytics - Durham College, Toronto | 2024 | GPA 4.58, Dean's Honour Roll",
+    "Postgraduate Certificate, Project Management - Fleming College, Toronto | 2023 | GPA 3.90, Dean's Honours",
+    "B.E., Mechanical Engineering - Silveroak College of Engineering, India | 2015-2019",
+    "Master Certification, CAD/CAM & Design Engineering - Indo German Tool Room, Ahmedabad | 2019-2020 | 85%"
+  ],
+  "certifications": [
+    "Databricks Fundamentals (2025)",
+    "PMI Agile Certified Practitioner (prep)",
+    "Business Analysis Foundations",
+    "Learning Jira Software",
+    "Certified SOLIDWORKS Mechanical Design Expert & Professional (also Weldments, Visualize, Associate)"
+  ],
+  "ai_block_title": "Working in an AI-Enabled Environment",
+  "ai_block": [
+    "Built a Claude API pipeline that automates job-application research, JD-to-resume matching, and first-draft generation, engineering AI into a working end-to-end workflow rather than one-off prompting.",
+    "Use Microsoft Copilot and ChatGPT regularly to accelerate SQL, DAX, and Python, and to draft documentation, data dictionaries, and report summaries.",
+    "Apply a data-governance mindset to validate AI outputs for accuracy and keep sensitive data out of public models, for practical and responsible AI use."
+  ],
+  "ai_line": [
+    "AI Tools",
+    "Microsoft Copilot, ChatGPT, Claude API (built a job-application automation pipeline), AI-assisted SQL/DAX/Python, documentation and summarization, output validation and responsible, data-protective use."
+  ],
+  "cover": {
+    "date": "",
+    "recipient": [
+      "[Company] - Hiring Team",
+      "[City]"
+    ],
+    "salutation": "Dear Hiring Team,",
+    "body": [
+      "[Placeholder. The cover letter is written per application using references/cover-letter-playbook.md and this profile. Replace this body via the cover argument to build_cover_letter.]"
+    ],
+    "closing": "Sincerely,"
+  }
+}

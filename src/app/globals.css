@@ -1,0 +1,428 @@
+@import 'tailwindcss';
+
+/* Tailwind v4 dark variant, driven by a class on <html> so the toggle can win
+   over the OS preference in both directions. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ===========================================================================
+   DESIGN TOKENS
+   ---------------------------------------------------------------------------
+   Dark is the default and the primary design. Light is a *selected* palette
+   stepped for a light surface — not an automatic inversion.
+   Change the accent hue here and the entire site re-themes.
+   ========================================================================= */
+
+:root,
+.dark {
+  color-scheme: dark;
+
+  /* Planes */
+  --bg: #08090b;
+  --bg-veil: #0b0d11;
+  --surface: #101318;
+  --surface-2: #161a21;
+  --surface-3: #1d222b;
+
+  /* Hairlines */
+  --line: rgb(255 255 255 / 0.07);
+  --line-strong: rgb(255 255 255 / 0.13);
+
+  /* Ink */
+  --ink: #f2f4f7;
+  --ink-2: #a4acb8;
+  --ink-3: #6d7581;
+
+  /* Accent — one hue, used for every interactive affordance */
+  --accent: #7c8fff;
+  --accent-hi: #9aa8ff;
+  --accent-lo: #4c5fd6;
+  --on-accent: #06070c;
+  --accent-wash: rgb(124 143 255 / 0.13);
+  --accent-line: rgb(124 143 255 / 0.32);
+
+  /* Support hues — decorative washes and the "impact" cue */
+  --violet: #9085e9;
+  --aqua: #2dd4a7;
+  --good: #0ca30c;
+
+  --ring: rgb(124 143 255 / 0.55);
+  --shadow-lift: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px -12px rgb(0 0 0 / 0.7);
+}
+
+.light {
+  color-scheme: light;
+
+  --bg: #fbfbfc;
+  --bg-veil: #f5f6f8;
+  --surface: #ffffff;
+  --surface-2: #f6f7f9;
+  --surface-3: #eef0f4;
+
+  --line: rgb(11 13 18 / 0.09);
+  --line-strong: rgb(11 13 18 / 0.16);
+
+  --ink: #0b0d12;
+  --ink-2: #4d545f;
+  --ink-3: #7a828e;
+
+  --accent: #3e52d9;
+  --accent-hi: #3143bd;
+  --accent-lo: #8d99f0;
+  --on-accent: #ffffff;
+  --accent-wash: rgb(62 82 217 / 0.09);
+  --accent-line: rgb(62 82 217 / 0.28);
+
+  --violet: #5b4fc4;
+  --aqua: #128a68;
+  --good: #006300;
+
+  --ring: rgb(62 82 217 / 0.5);
+  --shadow-lift: 0 1px 2px rgb(11 13 18 / 0.05), 0 12px 28px -14px rgb(11 13 18 / 0.22);
+}
+
+/* Map tokens into Tailwind's utility namespace (v4 `@theme inline` keeps them
+   as live var() references, so the theme swaps without recompiling classes). */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-veil: var(--bg-veil);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-accent: var(--accent);
+  --color-accent-hi: var(--accent-hi);
+  --color-accent-lo: var(--accent-lo);
+  --color-on-accent: var(--on-accent);
+  --color-accent-wash: var(--accent-wash);
+  --color-accent-line: var(--accent-line);
+  --color-violet: var(--violet);
+  --color-aqua: var(--aqua);
+  --color-good: var(--good);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, 'SF Mono', 'Cascadia Code', monospace;
+
+  --radius-card: 16px;
+
+  --shadow-lift: var(--shadow-lift);
+}
+
+/* ===========================================================================
+   BASE
+   ========================================================================= */
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  /* The sticky header is 64px; anchors land below it instead of underneath. */
+  scroll-padding-top: 88px;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+/* Headlines: tight optical tracking at display sizes. */
+h1,
+h2,
+h3 {
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* A single, consistent, always-visible focus treatment. Never removed. */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Skip link — first tab stop on the page. */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 200;
+  transform: translateY(-200%);
+  transition: transform 0.18s ease;
+  background: var(--accent);
+  color: var(--on-accent);
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* Scrollbar — quiet, matches the surface. */
+@supports selector(::-webkit-scrollbar) {
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--surface-3);
+    border-radius: 999px;
+    border: 3px solid var(--bg);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--ink-3);
+  }
+}
+
+/* ===========================================================================
+   COMPONENT PRIMITIVES
+   ========================================================================= */
+
+/* Glass panel. Uses a real backdrop blur where supported and degrades to a
+   solid surface where it isn't (Firefox with the flag off, forced-colors). */
+.glass {
+  background: color-mix(in oklab, var(--surface) 72%, transparent);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .glass {
+    background: var(--surface);
+  }
+}
+
+/* Card with a hairline top highlight — reads as lit from above. */
+.card {
+  position: relative;
+  background: linear-gradient(180deg, color-mix(in oklab, var(--surface-2) 92%, transparent), var(--surface));
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+}
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  background: linear-gradient(90deg, transparent, var(--line-strong) 22%, var(--line-strong) 78%, transparent);
+  pointer-events: none;
+}
+
+/* Pointer-tracked spotlight. --mx/--my are written by useSpotlight(). */
+.spotlight::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(
+    360px circle at var(--mx, 50%) var(--my, 50%),
+    var(--accent-wash),
+    transparent 62%
+  );
+  pointer-events: none;
+}
+.spotlight:hover::after,
+.spotlight:focus-within::after {
+  opacity: 1;
+}
+
+/* The engineered-grid backdrop. Structural, not noisy. */
+.grid-plane {
+  background-image: linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 78%);
+}
+
+/* Monospace label used for section kickers and data labels. */
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* Big standalone numbers use PROPORTIONAL figures — tabular-nums makes a
+   display-size value look loose. Tabular is reserved for aligned columns. */
+.figure {
+  font-variant-numeric: proportional-nums;
+  letter-spacing: -0.03em;
+}
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Animated gradient conic border, used sparingly on the primary CTA. */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+.conic-ring {
+  position: relative;
+}
+/* The gradient must read as a 1.5px BORDER, not a fill.
+   A negative-z-index pseudo-element does not work here: per spec, negative-z
+   descendants paint above their parent's own background, so the conic gradient
+   covered the button. The mask below punches out the interior, leaving only
+   the ring — which is what we wanted from the pseudo-element in the first place. */
+.conic-ring::before {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  padding: 1.5px;
+  pointer-events: none;
+  background: conic-gradient(
+    from var(--angle),
+    var(--accent-lo),
+    var(--violet),
+    var(--accent-hi),
+    var(--accent-lo)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: spin-ring 5s linear infinite;
+}
+@keyframes spin-ring {
+  to {
+    --angle: 360deg;
+  }
+}
+
+/* Marquee for the tech strip. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 42s linear infinite;
+}
+.marquee-mask {
+  mask-image: linear-gradient(90deg, #000 0, #000 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, #000 0, #000 92%, transparent 100%);
+}
+
+/* Slow drift for the ambient gradient blobs. */
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(4%, -6%, 0) scale(1.12);
+  }
+}
+.drift {
+  animation: drift 24s ease-in-out infinite;
+}
+
+/* Dot that pulses on the "currently available" indicator. */
+@keyframes ping-soft {
+  0% {
+    transform: scale(1);
+    opacity: 0.65;
+  }
+  70%,
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+.ping-soft {
+  animation: ping-soft 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* ===========================================================================
+   REDUCED MOTION
+   Everything decorative stops. Nothing that carries information depends on it.
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .drift,
+  .marquee-track,
+  .conic-ring::before {
+    animation: none !important;
+  }
+}
+
+/* ===========================================================================
+   FORCED COLORS / PRINT
+   ========================================================================= */
+@media (forced-colors: active) {
+  .card,
+  .glass {
+    border: 1px solid CanvasText;
+    background: Canvas;
+  }
+  .spotlight::after,
+  .conic-ring::before {
+    display: none;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.75em;
+    color: #444;
+  }
+}
