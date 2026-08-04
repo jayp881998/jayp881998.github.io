@@ -47,7 +47,7 @@ export function LevelMeter({ level, id }: { level: Level; id: string }) {
       </span>
       <span
         id={`${id}-level`}
-        className="font-mono text-[0.625rem] uppercase tracking-wider text-ink-3"
+        className="font-mono text-[0.625rem] uppercase tracking-wider text-ink-kicker"
       >
         {LEVEL_LABEL[level]}
       </span>

@@ -33,6 +33,7 @@ export function Avatar({ className }: { className?: string }) {
           height={800}
           loading="eager"
           decoding="async"
+          fetchPriority="high"
           onError={() => setFailed(true)}
           className="size-full object-cover"
         />

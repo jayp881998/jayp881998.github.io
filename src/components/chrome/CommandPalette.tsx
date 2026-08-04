@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { identity, navSections, projects } from '@/content/profile';
 import { useTheme } from '@/components/providers/ThemeProvider';
 import { useScrollLock } from '@/lib/hooks';
@@ -30,6 +31,8 @@ export function CommandPalette() {
   const [query, setQuery] = useState('');
   const [cursor, setCursor] = useState(0);
   const [copied, setCopied] = useState(false);
+  // document.body doesn't exist during SSR — gate the portal to after mount.
+  const [mounted, setMounted] = useState(false);
 
   const router = useRouter();
   const { toggle } = useTheme();
@@ -176,6 +179,8 @@ export function CommandPalette() {
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
+  useEffect(() => setMounted(true), []);
+
   useEffect(() => {
     if (open) requestAnimationFrame(() => inputRef.current?.focus());
   }, [open]);
@@ -223,15 +228,22 @@ export function CommandPalette() {
         </kbd>
       </button>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            className="fixed inset-0 z-[150] flex items-start justify-center p-4 pt-[12vh]"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
-          >
+      {/* Portaled straight to <body> so the overlay is never a DOM descendant
+          of <Header> — Header applies its own backdrop-blur once scrolled,
+          and an ancestor with a backdrop-filter creates a new containing
+          block that isolates a descendant's own backdrop-filter, silently
+          turning this scrim's blur into a plain dim on every scrolled page. */}
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {open && (
+              <motion.div
+                className="fixed inset-0 z-[150] flex items-start justify-center p-4 pt-[12vh]"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+              >
             <button
               type="button"
               aria-label="Close command palette"
@@ -326,10 +338,12 @@ export function CommandPalette() {
                   opens this
                 </span>
               </div>
-            </motion.div>
-          </motion.div>
+              </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body,
         )}
-      </AnimatePresence>
     </>
   );
 }

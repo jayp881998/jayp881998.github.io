@@ -10,6 +10,7 @@ import { ScrollProgress } from '@/components/chrome/ScrollProgress';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
 import { GradientField } from '@/components/ui/GradientField';
+import { asset } from '@/lib/utils';
 
 // Self-hosted at build time by next/font — no render-blocking request to
 // Google, no layout shift, and it works offline.
@@ -140,6 +141,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`dark ${inter.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        {/* Headshot is the hero's LCP element — preload it so the browser
+            doesn't discover it only after parsing down to the <img>. */}
+        <link rel="preload" as="image" href={asset(identity.headshot)} fetchPriority="high" />
         <StructuredData />
       </head>
       <body className="min-h-dvh antialiased">

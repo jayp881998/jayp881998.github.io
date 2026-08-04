@@ -53,22 +53,20 @@ export function Hero() {
                 </span>
               </span>
 
-              <p className="font-mono text-[0.6875rem] uppercase tracking-wider text-ink-3">
+              <p className="font-mono text-[0.6875rem] uppercase tracking-wider text-ink-kicker">
                 {identity.name} · {identity.location}
               </p>
             </motion.div>
 
-            {/* 2. The claim. */}
-            <motion.h1
-              {...rise(0.07)}
-              className="mt-6 text-[2rem] font-semibold leading-[1.1] text-ink sm:text-[2.75rem] lg:text-[3.25rem] lg:leading-[1.06]"
-            >
+            {/* 2. The claim. Rendered visible on first paint — this is the LCP
+                element, so it must never depend on a JS-driven fade-in. */}
+            <h1 className="mt-6 text-[2rem] font-semibold leading-[1.1] text-ink sm:text-[2.75rem] lg:text-[3.25rem] lg:leading-[1.06]">
               I build the{' '}
               <span className="bg-gradient-to-br from-accent-hi via-accent to-violet bg-clip-text text-transparent">
                 SQL-to-Power BI reporting
               </span>{' '}
               that operations and inventory teams actually run on.
-            </motion.h1>
+            </h1>
 
             {/* 3. How. */}
             <motion.p {...rise(0.14)} className="mt-6 text-base leading-relaxed text-ink-2 sm:text-lg">
@@ -131,11 +129,9 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Portrait — secondary on mobile, deliberately not the first thing read. */}
-          <motion.div
-            {...rise(0.16)}
-            className="order-first justify-self-start lg:order-none lg:justify-self-end"
-          >
+          {/* Portrait — secondary on mobile, deliberately not the first thing read.
+              Visible on first paint, not animated: it's part of the LCP region. */}
+          <div className="order-first justify-self-start lg:order-none lg:justify-self-end">
             <div className="relative">
               <Avatar className="size-24 shadow-[var(--shadow-lift)] sm:size-28 lg:size-[232px]" />
               {/* Soft accent glow behind the portrait. */}
@@ -144,7 +140,7 @@ export function Hero() {
                 className="absolute -inset-6 -z-10 rounded-[2rem] bg-[radial-gradient(circle_at_50%_30%,var(--accent-wash),transparent_70%)] blur-xl"
               />
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* The signature move: the actual architecture I ship, as a live diagram. */}

@@ -31,6 +31,10 @@
   --ink: #f2f4f7;
   --ink-2: #a4acb8;
   --ink-3: #6d7581;
+  /* Dedicated micro-label color: --ink-3 measures ~4.2:1 on --bg, just under
+     WCAG AA's 4.5:1 floor for small text. Kickers/eyebrows need their own
+     step so they clear AA without lightening every other muted-text use. */
+  --ink-kicker: #7d858f;
 
   /* Accent — one hue, used for every interactive affordance */
   --accent: #7c8fff;
@@ -64,6 +68,8 @@
   --ink: #0b0d12;
   --ink-2: #4d545f;
   --ink-3: #7a828e;
+  /* Measures ~3.75:1 on --bg for --ink-3; darkened for the same 4.5:1 AA floor. */
+  --ink-kicker: #626b78;
 
   --accent: #3e52d9;
   --accent-hi: #3143bd;
@@ -93,6 +99,7 @@
   --color-ink: var(--ink);
   --color-ink-2: var(--ink-2);
   --color-ink-3: var(--ink-3);
+  --color-ink-kicker: var(--ink-kicker);
   --color-accent: var(--accent);
   --color-accent-hi: var(--accent-hi);
   --color-accent-lo: var(--accent-lo);
@@ -273,7 +280,7 @@ p {
   font-size: 0.6875rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--ink-3);
+  color: var(--ink-kicker);
 }
 
 /* Big standalone numbers use PROPORTIONAL figures — tabular-nums makes a
