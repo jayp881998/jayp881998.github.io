@@ -455,8 +455,10 @@ export const projects: Project[] = [
     links: {
       github: 'https://github.com/jayp881998/IT-Support-Analytics-Pipeline',
     },
-    // ‼️ REPLACE — add sanitised dashboard screenshots to /public/projects/it-support-analytics-pipeline/
-    gallery: [],
+    gallery: [
+      { src: '/projects/it-support-analytics-pipeline/star-schema.png', caption: 'Star schema — ticket fact table with date, agent, requester, group, and channel dimensions.' },
+      { src: '/projects/it-support-analytics-pipeline/dashboard.png', caption: 'Executive overview dashboard (built on synthetic sample data).' },
+    ],
   },
   {
     slug: '211-canada-datathon',
