@@ -35,7 +35,7 @@ export function Avatar({ className }: { className?: string }) {
           decoding="async"
           fetchPriority="high"
           onError={() => setFailed(true)}
-          className="size-full object-cover"
+          className="absolute inset-0 size-full object-cover"
         />
       ) : (
         <div
