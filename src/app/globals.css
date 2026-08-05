@@ -44,8 +44,7 @@
   --accent-wash: rgb(124 143 255 / 0.13);
   --accent-line: rgb(124 143 255 / 0.32);
 
-  /* Support hues — decorative washes and the "impact" cue */
-  --violet: #9085e9;
+  /* Support hues — status/success only, never a second brand hue */
   --aqua: #2dd4a7;
   --good: #0ca30c;
 
@@ -78,7 +77,6 @@
   --accent-wash: rgb(62 82 217 / 0.09);
   --accent-line: rgb(62 82 217 / 0.28);
 
-  --violet: #5b4fc4;
   --aqua: #128a68;
   --good: #006300;
 
@@ -106,16 +104,29 @@
   --color-on-accent: var(--on-accent);
   --color-accent-wash: var(--accent-wash);
   --color-accent-line: var(--accent-line);
-  --color-violet: var(--violet);
   --color-aqua: var(--aqua);
   --color-good: var(--good);
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: var(--font-mono), ui-monospace, 'SF Mono', 'Cascadia Code', monospace;
 
   --radius-card: 16px;
 
   --shadow-lift: var(--shadow-lift);
+
+  /* Named structural rhythm on top of Tailwind v4's default 4px spacing
+     scale (--spacing, left at its 0.25rem default — already the Swiss-
+     appropriate base). Tailwind auto-generates padding, gap, and margin
+     utilities from any --spacing-<name> key, so these are usable directly
+     (py-section-y, mb-header-gap, ...) as components adopt them during
+     /frontend-design — defined here so the system exists; not yet applied
+     everywhere. */
+  --spacing-section-y: 5rem; /* current py-20 */
+  --spacing-section-y-lg: 7rem; /* current sm:py-28 */
+  --spacing-header-gap: 3rem; /* current mb-12, section kicker/title to content */
+  --spacing-header-gap-lg: 4rem; /* current sm:mb-16 */
+  --spacing-card: 1.5rem; /* current p-6, default card padding */
+  --spacing-control: 2.75rem; /* current h-11, default button/input height */
 }
 
 /* ===========================================================================
@@ -265,15 +276,6 @@ p {
   opacity: 1;
 }
 
-/* The engineered-grid backdrop. Structural, not noisy. */
-.grid-plane {
-  background-image: linear-gradient(to right, var(--line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 78%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 78%);
-}
-
 /* Monospace label used for section kickers and data labels. */
 .kicker {
   font-family: var(--font-mono);
@@ -293,48 +295,13 @@ p {
   font-variant-numeric: tabular-nums;
 }
 
-/* Animated gradient conic border, used sparingly on the primary CTA. */
-@property --angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-.conic-ring {
-  position: relative;
-}
-/* The gradient must read as a 1.5px BORDER, not a fill.
-   A negative-z-index pseudo-element does not work here: per spec, negative-z
-   descendants paint above their parent's own background, so the conic gradient
-   covered the button. The mask below punches out the interior, leaving only
-   the ring — which is what we wanted from the pseudo-element in the first place. */
-.conic-ring::before {
-  content: '';
-  position: absolute;
-  inset: -1.5px;
-  border-radius: inherit;
-  padding: 1.5px;
-  pointer-events: none;
-  background: conic-gradient(
-    from var(--angle),
-    var(--accent-lo),
-    var(--violet),
-    var(--accent-hi),
-    var(--accent-lo)
-  );
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  animation: spin-ring 5s linear infinite;
-}
-@keyframes spin-ring {
-  to {
-    --angle: 360deg;
-  }
+/* Flat single-accent ring + glow, used sparingly on the primary CTA.
+   Replaces a prior multi-hue spinning conic-gradient border — static and
+   one hue, matching "flat, purposeful accents" over decorative motion. */
+.accent-glow {
+  box-shadow:
+    0 0 0 1.5px var(--accent-line),
+    0 10px 28px -12px var(--accent-wash);
 }
 
 /* Marquee for the tech strip. */
@@ -398,8 +365,7 @@ p {
     scroll-behavior: auto !important;
   }
   .drift,
-  .marquee-track,
-  .conic-ring::before {
+  .marquee-track {
     animation: none !important;
   }
 }
@@ -413,8 +379,7 @@ p {
     border: 1px solid CanvasText;
     background: Canvas;
   }
-  .spotlight::after,
-  .conic-ring::before {
+  .spotlight::after {
     display: none;
   }
 }

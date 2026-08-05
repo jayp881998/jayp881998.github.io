@@ -61,11 +61,8 @@ export function Hero() {
             {/* 2. The claim. Rendered visible on first paint — this is the LCP
                 element, so it must never depend on a JS-driven fade-in. */}
             <h1 className="mt-6 text-[2rem] font-semibold leading-[1.1] text-ink sm:text-[2.75rem] lg:text-[3.25rem] lg:leading-[1.06]">
-              I build the{' '}
-              <span className="bg-gradient-to-br from-accent-hi via-accent to-violet bg-clip-text text-transparent">
-                SQL-to-Power BI reporting
-              </span>{' '}
-              that operations and inventory teams actually run on.
+              I build the <span className="text-accent">SQL-to-Power BI reporting</span> that
+              operations and inventory teams actually run on.
             </h1>
 
             {/* 3. How. */}
@@ -90,7 +87,7 @@ export function Hero() {
               <a
                 href={asset(identity.resume)}
                 download=""
-                className="conic-ring inline-flex h-12 items-center gap-2 rounded-full bg-ink px-6 text-[0.9375rem] font-medium text-bg transition-transform hover:scale-[1.03] active:scale-95"
+                className="accent-glow inline-flex h-12 items-center gap-2 rounded-full bg-ink px-6 text-[0.9375rem] font-medium text-bg transition-transform hover:scale-[1.03] active:scale-95"
               >
                 <Icon name="download" size={17} />
                 Download resume

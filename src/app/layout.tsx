@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import { Geist, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 
 import { certifications, education, experience, identity, seo, skillGroups } from '@/content/profile';
@@ -14,10 +14,10 @@ import { asset } from '@/lib/utils';
 
 // Self-hosted at build time by next/font — no render-blocking request to
 // Google, no layout shift, and it works offline.
-const inter = Inter({
+const geistSans = Geist({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter',
+  variable: '--font-geist',
 });
 
 const mono = JetBrains_Mono({
@@ -138,7 +138,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     // `dark` is the default so the very first paint is already correct;
     // themeInitScript replaces it before paint if the visitor chose light.
-    <html lang="en" className={`dark ${inter.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`dark ${geistSans.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         {/* Headshot is the hero's LCP element — preload it so the browser

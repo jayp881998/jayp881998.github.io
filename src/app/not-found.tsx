@@ -15,11 +15,7 @@ export default function NotFound() {
       <div className="max-w-xl">
         <p className="kicker">Error 404</p>
 
-        <h1 className="figure mt-4 text-6xl font-semibold text-ink sm:text-7xl">
-          <span className="bg-gradient-to-br from-accent-hi via-accent to-violet bg-clip-text text-transparent">
-            404
-          </span>
-        </h1>
+        <h1 className="figure mt-4 text-6xl font-semibold text-accent sm:text-7xl">404</h1>
 
         <p className="mt-5 text-xl font-medium text-ink">This row doesn’t exist in the table.</p>
 
