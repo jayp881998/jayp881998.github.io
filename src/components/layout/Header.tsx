@@ -119,7 +119,7 @@ export function Header() {
                 <a
                   href={asset(identity.resume)}
                   download=""
-                  className="flex h-11 w-full items-center justify-center gap-2 rounded-full bg-ink text-sm font-medium text-bg"
+                  className="flex h-control w-full items-center justify-center gap-2 rounded-full bg-ink text-sm font-medium text-bg"
                 >
                   <Icon name="download" size={15} />
                   Download resume

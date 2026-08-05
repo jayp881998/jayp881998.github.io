@@ -27,14 +27,14 @@ export default function NotFound() {
         <div className="mt-8 flex flex-wrap gap-2.5">
           <Link
             href="/"
-            className="inline-flex h-11 items-center gap-2 rounded-full bg-ink px-5 text-sm font-medium text-bg transition-transform hover:scale-[1.03] active:scale-95"
+            className="inline-flex h-control items-center gap-2 rounded-full bg-ink px-5 text-sm font-medium text-bg transition-transform hover:scale-[1.03] active:scale-95"
           >
             <Icon name="arrowRight" size={16} />
             Back to the portfolio
           </Link>
           <Link
             href="/#contact"
-            className="inline-flex h-11 items-center gap-2 rounded-full border border-line-strong px-5 text-sm text-ink-2 transition-colors hover:border-accent-line hover:text-ink"
+            className="inline-flex h-control items-center gap-2 rounded-full border border-line-strong px-5 text-sm text-ink-2 transition-colors hover:border-accent-line hover:text-ink"
           >
             Get in touch
           </Link>

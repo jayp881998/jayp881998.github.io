@@ -47,7 +47,7 @@ export function FloatingActions() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 10 }}
             transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-            className="group inline-flex h-11 items-center gap-2 rounded-full bg-ink px-4 text-sm font-medium text-bg shadow-[var(--shadow-lift)] transition-transform hover:scale-[1.03] active:scale-95"
+            className="group inline-flex h-control items-center gap-2 rounded-full bg-ink px-4 text-sm font-medium text-bg shadow-[var(--shadow-lift)] transition-transform hover:scale-[1.03] active:scale-95"
           >
             <Icon name="download" size={16} />
             <span className="hidden sm:inline">Resume</span>

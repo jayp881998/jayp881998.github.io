@@ -186,7 +186,7 @@ export function Contact() {
             <button
               type="submit"
               disabled={status === 'sending'}
-              className="mt-5 inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-ink px-5 text-sm font-medium text-bg transition-transform hover:scale-[1.01] active:scale-95 disabled:opacity-60"
+              className="mt-5 inline-flex h-control w-full items-center justify-center gap-2 rounded-full bg-ink px-5 text-sm font-medium text-bg transition-transform hover:scale-[1.01] active:scale-95 disabled:opacity-60"
             >
               {status === 'sending' ? 'Sending…' : 'Send message'}
               {status !== 'sending' && <Icon name="arrowRight" size={15} />}
@@ -240,7 +240,7 @@ function Field({
         type={type}
         required={required}
         autoComplete={autoComplete}
-        className="h-11 w-full rounded-lg border border-line bg-surface-2/60 px-3.5 text-sm text-ink outline-none transition-colors placeholder:text-ink-3 focus:border-accent-line"
+        className="h-control w-full rounded-lg border border-line bg-surface-2/60 px-3.5 text-sm text-ink outline-none transition-colors placeholder:text-ink-3 focus:border-accent-line"
       />
     </div>
   );
