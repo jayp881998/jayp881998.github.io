@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { identity, navSections, projects } from '@/content/profile';
@@ -35,6 +35,7 @@ export function CommandPalette() {
   const [mounted, setMounted] = useState(false);
 
   const router = useRouter();
+  const pathname = usePathname();
   const { toggle } = useTheme();
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
@@ -50,12 +51,19 @@ export function CommandPalette() {
   const goToSection = useCallback(
     (id: string) => {
       close();
+      // These ids only exist on "/" — from a case-study page (or any future
+      // non-home route) there's nothing to scroll to, so navigate home first
+      // and let the browser resolve the hash once that page has mounted.
+      if (pathname !== '/') {
+        router.push(`/#${id}`);
+        return;
+      }
       // Let the dialog unmount before scrolling, or the scroll lock fights it.
       requestAnimationFrame(() => {
         document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     },
-    [close],
+    [close, pathname, router],
   );
 
   const actions = useMemo<Action[]>(() => {

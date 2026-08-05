@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { identity, navSections } from '@/content/profile';
-import { asset } from '@/lib/utils';
+import { asset, homeAnchor } from '@/lib/utils';
 import { Icon } from '@/components/ui/Icon';
 import { Container } from '@/components/ui/Section';
 
@@ -23,7 +23,7 @@ export function Footer() {
           <nav aria-label="Footer" className="flex flex-col gap-2">
             <p className="kicker mb-1">Sections</p>
             {navSections.map((s) => (
-              <a key={s.id} href={`#${s.id}`} className="text-sm text-ink-3 transition-colors hover:text-ink">
+              <a key={s.id} href={homeAnchor(s.id)} className="text-sm text-ink-3 transition-colors hover:text-ink">
                 {s.label}
               </a>
             ))}

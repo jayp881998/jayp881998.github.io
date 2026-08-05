@@ -16,6 +16,19 @@ export function asset(path: string): string {
   return `${base}${path}`;
 }
 
+/**
+ * Href for a home-page anchor section (e.g. `#work`), safe to use from any
+ * route. A bare `#work` only scrolls correctly when already on `/` — from
+ * `/work/[slug]` (or any future non-home route) it resolves against the
+ * current page and finds nothing. Prefixing with `/` (and the basePath, for
+ * sub-path deploys) makes the browser navigate home first, then jump to the
+ * anchor, from anywhere.
+ */
+export function homeAnchor(id: string): string {
+  const base = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+  return `${base}/#${id}`;
+}
+
 /** "Jay Panchal" -> "JP". Used by the headshot fallback. */
 export function initials(name: string): string {
   return name
