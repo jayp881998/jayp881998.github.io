@@ -70,6 +70,14 @@ export type Project = {
   /** Screenshots. Drop files in /public/projects/<slug>/ and list them here.
    *  Leave the array empty and the gallery renders a labelled placeholder. */
   gallery: { src: string; caption: string }[];
+  /**
+   * Optional featured dashboard, shown full-width in its own section on the
+   * case-study page. `src` is a sanitized screenshot shown now; set `embedUrl`
+   * later (a Power BI Publish-to-web URL) and the same slot renders a live
+   * iframe instead — a data-only swap, no code change. Omit the field entirely
+   * and the section does not render.
+   */
+  dashboard?: { src: string; caption: string; embedUrl?: string };
 };
 
 export type Credential = {
@@ -477,8 +485,13 @@ export const projects: Project[] = [
     },
     gallery: [
       { src: '/projects/it-support-analytics-pipeline/star-schema.png', caption: 'Star schema — ticket fact table with date, agent, requester, group, and channel dimensions.' },
-      { src: '/projects/it-support-analytics-pipeline/dashboard.png', caption: 'Executive overview dashboard (built on synthetic sample data).' },
     ],
+    dashboard: {
+      src: '/projects/it-support-analytics-pipeline/dashboard.png',
+      caption: 'Executive overview — built on synthetic sample data.',
+      // Set embedUrl to a Power BI Publish-to-web link to replace the
+      // screenshot with a live, interactive report in the same slot.
+    },
   },
   {
     slug: '211-canada-datathon',

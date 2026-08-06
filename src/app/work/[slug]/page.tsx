@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { identity, projects } from '@/content/profile';
 import { asset } from '@/lib/utils';
 import { GalleryPlaceholder } from '@/components/sections/Work';
+import { DashboardPanel } from '@/components/ui/DashboardPanel';
 import { Icon } from '@/components/ui/Icon';
 import { PillRow } from '@/components/ui/Pill';
 import { PipelineDiagram } from '@/components/ui/PipelineDiagram';
@@ -204,6 +205,24 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
             )}
           </aside>
         </div>
+
+        {/* Featured dashboard — the reporting layer the pipeline feeds. Shown
+            full-width because it is the single highest-credibility asset on the
+            page; renders only when the project defines a dashboard. */}
+        {project.dashboard && (
+          <section className="mt-20" aria-label="Dashboard">
+            <Reveal>
+              <h2 className="text-xl font-semibold text-ink">The dashboard</h2>
+              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-2">
+                The reporting layer the pipeline feeds — the governed model behind it is what keeps
+                every team reading the same numbers.
+              </p>
+            </Reveal>
+            <div className="mt-6">
+              <DashboardPanel dashboard={project.dashboard} title={project.title} />
+            </div>
+          </section>
+        )}
 
         {/* Architecture, full width */}
         {project.pipeline.length > 0 && (
