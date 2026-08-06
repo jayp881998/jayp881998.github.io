@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import type { Metric } from '@/content/profile';
 import { useReducedMotionSafe, useSpotlight } from '@/lib/hooks';
 import { cn } from '@/lib/utils';
+import { CountUp } from './CountUp';
 
 /**
  * Stat tile — label, value, and the provenance of the number.
@@ -29,8 +30,11 @@ export function StatTile({ metric, index = 0 }: { metric: Metric; index?: number
       transition={{ duration: 0.5, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
       className="card spotlight group relative overflow-hidden p-5 transition-colors duration-300 hover:border-accent-line sm:p-6"
     >
-      {/* Value — proportional figures; tabular-nums would make it look loose. */}
-      <p className="figure text-3xl font-semibold text-ink sm:text-[2.125rem]">{metric.value}</p>
+      {/* Value — proportional figures; tabular-nums would make it look loose.
+          Counts up from zero on scroll-in (static under reduced motion). */}
+      <p className="figure text-3xl font-semibold text-ink sm:text-[2.125rem]">
+        <CountUp value={metric.value} />
+      </p>
 
       {/* Label — the text token, never the accent colour. */}
       <p className="mt-2 text-sm font-medium leading-snug text-ink">{metric.label}</p>
