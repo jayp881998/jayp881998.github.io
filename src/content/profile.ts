@@ -57,7 +57,12 @@ export type Project = {
   title: string;
   kicker: string;
   period: string;
+  /** Promoted to the "Selected work" cards (vs "Also published"). More than
+   *  one project can be featured. */
   featured: boolean;
+  /** The single flagship — gets the full signature treatment (scrollytelling
+   *  architecture rail). Distinct from `featured`, which is the card split. */
+  flagship?: boolean;
   /** Shown on the card. One sentence. */
   tagline: string;
   problem: string;
@@ -447,6 +452,7 @@ export const projects: Project[] = [
     kicker: 'End-to-end BI build',
     period: '2024 — 2025',
     featured: true,
+    flagship: true,
     tagline:
       'Zendesk API to a governed SQL Server star schema to Power BI, refreshing itself every 45 minutes.',
     problem:

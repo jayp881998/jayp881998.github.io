@@ -7,7 +7,7 @@ import { GalleryPlaceholder } from '@/components/sections/Work';
 import { DashboardPanel } from '@/components/ui/DashboardPanel';
 import { Icon } from '@/components/ui/Icon';
 import { PillRow } from '@/components/ui/Pill';
-import { PipelineDiagram } from '@/components/ui/PipelineDiagram';
+import { PipelineDiagram, ScrollyPipeline } from '@/components/ui/PipelineDiagram';
 import { Reveal } from '@/components/ui/Reveal';
 import { Container } from '@/components/ui/Section';
 import { StatGrid } from '@/components/ui/StatTile';
@@ -233,8 +233,14 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
                 Each stage below is a real component of the build, in execution order.
               </p>
             </Reveal>
+            {/* The flagship tells its architecture as a scroll-linked rail; the
+                other case studies keep the compact static grid. */}
             <div className="mt-6">
-              <PipelineDiagram stages={project.pipeline} />
+              {project.flagship ? (
+                <ScrollyPipeline stages={project.pipeline} />
+              ) : (
+                <PipelineDiagram stages={project.pipeline} />
+              )}
             </div>
           </section>
         )}

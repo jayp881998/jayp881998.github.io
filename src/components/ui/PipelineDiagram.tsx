@@ -1,6 +1,7 @@
 ﻿'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import { useRef, useState } from 'react';
 import type { PipelineStage } from '@/content/profile';
 import { Icon } from './Icon';
 import { useReducedMotionSafe } from '@/lib/hooks';
@@ -76,6 +77,92 @@ export function PipelineDiagram({
         ))}
       </ol>
     </div>
+  );
+}
+
+/**
+ * Scroll-linked vertical rail — the flagship's signature moment.
+ *
+ * As the reader scrolls the section, each stage activates in sequence, tied to
+ * scroll position (so it tracks back and forth, not a one-shot reveal). The
+ * connector segment to an already-reached stage fills with the accent, so the
+ * eye follows the data down its actual path. Under reduced motion every stage
+ * is shown active immediately with no scroll dependency.
+ *
+ * Deliberately no per-stage "counting metric": the stages carry no measured
+ * per-node figure, and inventing one for each would fabricate numbers — which
+ * this site never does. The sequential reveal is the effect; the honest detail
+ * line under each stage is the payload.
+ */
+export function ScrollyPipeline({ stages }: { stages: PipelineStage[] }) {
+  const reduce = useReducedMotionSafe();
+  const ref = useRef<HTMLOListElement>(null);
+  // Progress runs 0→1 as the list travels from low in the viewport to high,
+  // which is the window during which the reader is actually reading it.
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start 75%', 'end 55%'],
+  });
+  const [active, setActive] = useState(-1);
+
+  useMotionValueEvent(scrollYProgress, 'change', (p) => {
+    setActive(Math.min(stages.length - 1, Math.floor(p * stages.length)));
+  });
+
+  if (!stages.length) return null;
+
+  return (
+    <ol ref={ref} className="space-y-2">
+      {stages.map((stage, i) => {
+        const on = reduce || i <= active;
+        const linkOn = reduce || i < active;
+        const last = i === stages.length - 1;
+
+        return (
+          <li key={stage.label} className="flex gap-4">
+            {/* Node + connector column — self-stretch makes the connector fill
+                exactly to the next node regardless of card height. */}
+            <div className="flex flex-col items-center self-stretch">
+              <span
+                aria-hidden="true"
+                className={cn(
+                  'grid size-9 shrink-0 place-items-center rounded-lg border transition-colors duration-500 sm:size-10',
+                  on
+                    ? 'border-accent-line bg-accent-wash text-accent'
+                    : 'border-line bg-surface-2 text-ink-3',
+                )}
+              >
+                <Icon name={stage.kind} size={16} />
+              </span>
+              {!last && (
+                <span
+                  aria-hidden="true"
+                  className={cn(
+                    'mt-1 w-px flex-1 transition-colors duration-500',
+                    linkOn ? 'bg-accent' : 'bg-line',
+                  )}
+                />
+              )}
+            </div>
+
+            <div
+              className={cn(
+                'card mb-1 flex-1 p-4 transition-opacity duration-500',
+                on ? 'opacity-100' : 'opacity-45',
+              )}
+            >
+              <div className="flex items-baseline gap-2">
+                <span className="tabular font-mono text-[0.625rem] text-ink-3">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <p className="text-sm font-medium text-ink">{stage.label}</p>
+              </div>
+              <p className="mt-1 text-xs leading-relaxed text-ink-3">{stage.detail}</p>
+            </div>
+          </li>
+        );
+      })}
+    </ol>
   );
 }
 
