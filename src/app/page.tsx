@@ -4,6 +4,7 @@ import { Education } from '@/components/sections/Education';
 import { Experience } from '@/components/sections/Experience';
 import { Hero } from '@/components/sections/Hero';
 import { Skills } from '@/components/sections/Skills';
+import { SkillsStrip } from '@/components/sections/SkillsStrip';
 import { Work } from '@/components/sections/Work';
 import { Rule } from '@/components/ui/Section';
 
@@ -23,7 +24,8 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <Rule className="mt-8" />
+      <SkillsStrip />
+      <Rule />
       <Work />
       <Rule />
       <About />

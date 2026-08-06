@@ -181,6 +181,26 @@ export const quickFacts = [
   'Toronto, ON',
 ];
 
+/**
+ * Core stack — the headline technologies for the compact strip that lands
+ * right after the proof band, so a recruiter sees the stack in the first
+ * scroll. A curated subset of the Core-rated skills below (see skillGroups),
+ * ordered by how central each is to the target roles. The deep, step-rated
+ * grid lower on the page carries the full inventory.
+ */
+export const coreStack = [
+  'Power BI',
+  'DAX',
+  'T-SQL',
+  'SQL Server',
+  'Power Query / M',
+  'Python',
+  'Star-schema warehousing',
+  'REST API integration',
+  'SQL Server Agent',
+  'Databricks / PySpark',
+];
+
 // ---------------------------------------------------------------------------
 // What makes the profile different — About section cards.
 // ---------------------------------------------------------------------------
