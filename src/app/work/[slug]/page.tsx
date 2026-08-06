@@ -188,9 +188,11 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
                       <img
                         src={asset(shot.src)}
                         alt={shot.caption}
+                        width={shot.width}
+                        height={shot.height}
                         loading="lazy"
                         decoding="async"
-                        className="w-full rounded-lg border border-line"
+                        className="h-auto w-full rounded-lg border border-line"
                       />
                       <figcaption className="mt-2 text-xs text-ink-3">{shot.caption}</figcaption>
                     </figure>

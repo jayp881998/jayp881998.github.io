@@ -29,8 +29,10 @@ export default function OpenGraphImage() {
           flexDirection: 'column',
           justifyContent: 'space-between',
           background: '#08090b',
+          // Single-hue accent wash (two positions, one family) — the retired
+          // violet second hue would contradict the flattened v2 palette.
           backgroundImage:
-            'radial-gradient(1000px circle at 10% -10%, rgba(124,143,255,0.24), transparent 55%), radial-gradient(800px circle at 95% 110%, rgba(144,133,233,0.20), transparent 55%)',
+            'radial-gradient(1000px circle at 10% -10%, rgba(124,143,255,0.24), transparent 55%), radial-gradient(800px circle at 95% 110%, rgba(76,95,214,0.20), transparent 55%)',
           padding: 72,
           fontFamily: 'sans-serif',
         }}

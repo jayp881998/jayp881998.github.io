@@ -73,8 +73,10 @@ export type Project = {
   pipeline: PipelineStage[];
   links: { github?: string; demo?: string; writeup?: string };
   /** Screenshots. Drop files in /public/projects/<slug>/ and list them here.
-   *  Leave the array empty and the gallery renders a labelled placeholder. */
-  gallery: { src: string; caption: string }[];
+   *  Leave the array empty and the gallery renders a labelled placeholder.
+   *  Give each image its intrinsic pixel width/height so the browser reserves
+   *  space and the page doesn't shift as it lazy-loads (no CLS). */
+  gallery: { src: string; caption: string; width?: number; height?: number }[];
   /**
    * Optional featured dashboard, shown full-width in its own section on the
    * case-study page. `src` is a sanitized screenshot shown now; set `embedUrl`
@@ -490,7 +492,7 @@ export const projects: Project[] = [
       github: 'https://github.com/jayp881998/IT-Support-Analytics-Pipeline',
     },
     gallery: [
-      { src: '/projects/it-support-analytics-pipeline/star-schema.png', caption: 'Star schema — ticket fact table with date, agent, requester, group, and channel dimensions.' },
+      { src: '/projects/it-support-analytics-pipeline/star-schema.png', caption: 'Star schema — ticket fact table with date, agent, requester, group, and channel dimensions.', width: 2556, height: 1655 },
     ],
     dashboard: {
       src: '/projects/it-support-analytics-pipeline/dashboard.png',
