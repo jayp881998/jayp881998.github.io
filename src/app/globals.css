@@ -30,7 +30,10 @@
   /* Ink */
   --ink: #f2f4f7;
   --ink-2: #a4acb8;
-  --ink-3: #6d7581;
+  /* Most-muted text. Lifted from #6d7581 (which measured ~4.3:1 on --bg and
+     ~3.8:1 on cards — under WCAG AA) to clear 4.5:1 on the base and card
+     surfaces, staying just under --ink-kicker so the hierarchy holds. */
+  --ink-3: #7c8490;
   /* Dedicated micro-label color: --ink-3 measures ~4.2:1 on --bg, just under
      WCAG AA's 4.5:1 floor for small text. Kickers/eyebrows need their own
      step so they clear AA without lightening every other muted-text use. */
@@ -66,7 +69,9 @@
 
   --ink: #0b0d12;
   --ink-2: #4d545f;
-  --ink-3: #7a828e;
+  /* Lifted from #7a828e (~3.75:1 on --bg — under AA) to clear 4.5:1 on the
+     base and card surfaces, staying just under --ink-kicker. */
+  --ink-3: #6b7280;
   /* Measures ~3.75:1 on --bg for --ink-3; darkened for the same 4.5:1 AA floor. */
   --ink-kicker: #626b78;
 
