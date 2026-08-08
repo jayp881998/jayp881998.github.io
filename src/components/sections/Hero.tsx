@@ -131,22 +131,14 @@ export function Hero() {
           {/* Mobile: just the headshot, small, above the text — visible on first
               paint, not animated, since it's part of the LCP region. The full
               bento cluster below would push the H1 off-screen on a phone. */}
-          <div className="relative order-first justify-self-start lg:hidden">
+          <div className="order-first justify-self-start lg:hidden">
             <Avatar className="size-24 shadow-[var(--shadow-lift)] sm:size-28" />
-            <div
-              aria-hidden="true"
-              className="absolute -inset-6 -z-10 rounded-[2rem] bg-[radial-gradient(circle_at_50%_30%,var(--accent-wash),transparent_70%)] blur-xl"
-            />
           </div>
 
           {/* Desktop: a bento cluster — "this person makes dashboards" at a
               glance. Headshot + status + current role + a live-feeling KPI tile.
               lg-only; the mobile headshot above stands in on smaller screens. */}
-          <div className="relative hidden w-[336px] lg:block lg:justify-self-end">
-            <div
-              aria-hidden="true"
-              className="absolute -inset-8 -z-10 rounded-[2.5rem] bg-[radial-gradient(circle_at_60%_25%,var(--accent-wash),transparent_70%)] blur-2xl"
-            />
+          <div className="hidden w-[336px] lg:block lg:justify-self-end">
             <div className="grid grid-cols-2 gap-3">
               {/* Headshot tile — full width of the cluster. Definite height (not
                   an aspect ratio) so object-cover has something to resolve
@@ -210,7 +202,7 @@ export function Hero() {
               <StatTile key={m.label} metric={m} index={i} />
             ))}
           </div>
-          <p className="mt-4 text-xs text-ink-3">
+          <p className="mt-4 max-w-[68ch] text-xs text-ink-3">
             Every figure above comes from a specific role or project and is described in context below.
           </p>
         </div>

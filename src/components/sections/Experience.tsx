@@ -75,7 +75,7 @@ function RoleItem({ role, defaultOpen }: { role: Role; defaultOpen: boolean }) {
               {role.dates}
             </p>
 
-            <p className="mt-3 text-[0.8125rem] leading-relaxed text-ink-2">{role.summary}</p>
+            <p className="mt-3 max-w-[68ch] text-[0.8125rem] leading-relaxed text-ink-2">{role.summary}</p>
           </div>
 
           <span
@@ -101,7 +101,7 @@ function RoleItem({ role, defaultOpen }: { role: Role; defaultOpen: boolean }) {
             >
               <div className="border-t border-line px-5 pb-5 pt-5 sm:px-6 sm:pb-6">
                 <p className="kicker mb-3">What I did</p>
-                <ul className="space-y-2.5">
+                <ul className="max-w-[68ch] space-y-2.5">
                   {role.highlights.map((point) => (
                     <li
                       key={point.slice(0, 30)}

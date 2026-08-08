@@ -1,0 +1,19 @@
+{
+  "detector": {
+    "ignoreRules": [
+      "kicker-above-heading",
+      "tiny-text",
+      "undersized-ui-text",
+      "all-caps-body"
+    ],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "geist",
+        "createdAt": "2026-08-08T15:02:11.320Z",
+        "reason": "Geist chosen in grill-me after General Sans (Fontshare) ruled out; accepted tradeoff, see FUTURE_CONSIDERATIONS.md"
+      }
+    ]
+  }
+}

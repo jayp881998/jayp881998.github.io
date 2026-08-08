@@ -231,7 +231,7 @@ export function CommandPalette() {
       >
         <Icon name="search" size={13} />
         <span>Search</span>
-        <kbd className="ml-1 rounded border border-line bg-surface-3 px-1.5 py-0.5 font-mono text-[0.625rem] text-ink-3">
+        <kbd className="ml-1 rounded border border-line bg-surface-3 px-1.5 py-0.5 font-mono text-[0.625rem] text-ink-2">
           ⌘K
         </kbd>
       </button>

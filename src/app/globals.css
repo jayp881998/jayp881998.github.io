@@ -47,8 +47,10 @@
   --accent-wash: rgb(124 143 255 / 0.13);
   --accent-line: rgb(124 143 255 / 0.32);
 
-  /* Support hues — status/success only, never a second brand hue */
-  --aqua: #2dd4a7;
+  /* Support hues — status/success only, never a second brand hue.
+     Muted from a bright #2dd4a7 (chroma dropped below the neon threshold) so
+     it reads as an intentional status hue, not an AI-slop neon accent. */
+  --aqua: #5ea48d;
   --good: #0ca30c;
 
   --ring: rgb(124 143 255 / 0.55);
@@ -82,7 +84,8 @@
   --accent-wash: rgb(62 82 217 / 0.09);
   --accent-line: rgb(62 82 217 / 0.28);
 
-  --aqua: #128a68;
+  /* Deepened from #128a68 (~4.2:1 as text — under AA) to clear 4.5:1. */
+  --aqua: #0f7d5e;
   --good: #006300;
 
   --ring: rgb(62 82 217 / 0.5);
@@ -303,10 +306,13 @@ p {
 /* Flat single-accent ring + glow, used sparingly on the primary CTA.
    Replaces a prior multi-hue spinning conic-gradient border — static and
    one hue, matching "flat, purposeful accents" over decorative motion. */
+/* Primary CTA: a crisp accent ring (a deliberate 1px border affordance, not a
+   glow) over a neutral elevation shadow. The colored blurred halo it used to
+   carry was a generated-UI tell; elevation should read as light, not chroma. */
 .accent-glow {
   box-shadow:
     0 0 0 1.5px var(--accent-line),
-    0 10px 28px -12px var(--accent-wash);
+    0 8px 24px -14px rgb(0 0 0 / 0.55);
 }
 
 /* Marquee for the tech strip. */

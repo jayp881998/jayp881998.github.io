@@ -94,7 +94,7 @@ export function Contact() {
                 </span>
                 <span className="block truncate text-sm text-ink">{identity.email}</span>
               </span>
-              <span className="shrink-0 font-mono text-[0.625rem] text-ink-3">
+              <span className="shrink-0 font-mono text-[0.6875rem] text-ink-3">
                 {copied ? 'copied' : 'copy'}
               </span>
             </button>
