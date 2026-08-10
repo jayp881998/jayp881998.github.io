@@ -4,9 +4,10 @@ import { notFound } from 'next/navigation';
 import { identity, projects } from '@/content/profile';
 import { asset } from '@/lib/utils';
 import { GalleryPlaceholder } from '@/components/sections/Work';
+import { DashboardPanel } from '@/components/ui/DashboardPanel';
 import { Icon } from '@/components/ui/Icon';
 import { PillRow } from '@/components/ui/Pill';
-import { PipelineDiagram } from '@/components/ui/PipelineDiagram';
+import { PipelineDiagram, ScrollyPipeline } from '@/components/ui/PipelineDiagram';
 import { Reveal } from '@/components/ui/Reveal';
 import { Container } from '@/components/ui/Section';
 import { StatGrid } from '@/components/ui/StatTile';
@@ -187,9 +188,11 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
                       <img
                         src={asset(shot.src)}
                         alt={shot.caption}
+                        width={shot.width}
+                        height={shot.height}
                         loading="lazy"
                         decoding="async"
-                        className="w-full rounded-lg border border-line"
+                        className="h-auto w-full rounded-lg border border-line"
                       />
                       <figcaption className="mt-2 text-xs text-ink-3">{shot.caption}</figcaption>
                     </figure>
@@ -205,6 +208,24 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
           </aside>
         </div>
 
+        {/* Featured dashboard — the reporting layer the pipeline feeds. Shown
+            full-width because it is the single highest-credibility asset on the
+            page; renders only when the project defines a dashboard. */}
+        {project.dashboard && (
+          <section className="mt-20" aria-label="Dashboard">
+            <Reveal>
+              <h2 className="text-xl font-semibold text-ink">The dashboard</h2>
+              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-2">
+                The reporting layer the pipeline feeds — the governed model behind it is what keeps
+                every team reading the same numbers.
+              </p>
+            </Reveal>
+            <div className="mt-6">
+              <DashboardPanel dashboard={project.dashboard} title={project.title} />
+            </div>
+          </section>
+        )}
+
         {/* Architecture, full width */}
         {project.pipeline.length > 0 && (
           <section className="mt-20" aria-label="Architecture">
@@ -214,8 +235,14 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
                 Each stage below is a real component of the build, in execution order.
               </p>
             </Reveal>
+            {/* The flagship tells its architecture as a scroll-linked rail; the
+                other case studies keep the compact static grid. */}
             <div className="mt-6">
-              <PipelineDiagram stages={project.pipeline} />
+              {project.flagship ? (
+                <ScrollyPipeline stages={project.pipeline} />
+              ) : (
+                <PipelineDiagram stages={project.pipeline} />
+              )}
             </div>
           </section>
         )}

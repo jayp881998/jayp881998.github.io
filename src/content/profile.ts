@@ -57,7 +57,12 @@ export type Project = {
   title: string;
   kicker: string;
   period: string;
+  /** Promoted to the "Selected work" cards (vs "Also published"). More than
+   *  one project can be featured. */
   featured: boolean;
+  /** The single flagship — gets the full signature treatment (scrollytelling
+   *  architecture rail). Distinct from `featured`, which is the card split. */
+  flagship?: boolean;
   /** Shown on the card. One sentence. */
   tagline: string;
   problem: string;
@@ -68,8 +73,18 @@ export type Project = {
   pipeline: PipelineStage[];
   links: { github?: string; demo?: string; writeup?: string };
   /** Screenshots. Drop files in /public/projects/<slug>/ and list them here.
-   *  Leave the array empty and the gallery renders a labelled placeholder. */
-  gallery: { src: string; caption: string }[];
+   *  Leave the array empty and the gallery renders a labelled placeholder.
+   *  Give each image its intrinsic pixel width/height so the browser reserves
+   *  space and the page doesn't shift as it lazy-loads (no CLS). */
+  gallery: { src: string; caption: string; width?: number; height?: number }[];
+  /**
+   * Optional featured dashboard, shown full-width in its own section on the
+   * case-study page. `src` is a sanitized screenshot shown now; set `embedUrl`
+   * later (a Power BI Publish-to-web URL) and the same slot renders a live
+   * iframe instead — a data-only swap, no code change. Omit the field entirely
+   * and the section does not render.
+   */
+  dashboard?: { src: string; caption: string; embedUrl?: string };
 };
 
 export type Credential = {
@@ -179,6 +194,26 @@ export const quickFacts = [
   '2 Canadian post-grads, both with honours',
   'Power BI · T-SQL · Python',
   'Toronto, ON',
+];
+
+/**
+ * Core stack — the headline technologies for the compact strip that lands
+ * right after the proof band, so a recruiter sees the stack in the first
+ * scroll. A curated subset of the Core-rated skills below (see skillGroups),
+ * ordered by how central each is to the target roles. The deep, step-rated
+ * grid lower on the page carries the full inventory.
+ */
+export const coreStack = [
+  'Power BI',
+  'DAX',
+  'T-SQL',
+  'SQL Server',
+  'Power Query / M',
+  'Python',
+  'Star-schema warehousing',
+  'REST API integration',
+  'SQL Server Agent',
+  'Databricks / PySpark',
 ];
 
 // ---------------------------------------------------------------------------
@@ -419,6 +454,7 @@ export const projects: Project[] = [
     kicker: 'End-to-end BI build',
     period: '2024 — 2025',
     featured: true,
+    flagship: true,
     tagline:
       'Zendesk API to a governed SQL Server star schema to Power BI, refreshing itself every 45 minutes.',
     problem:
@@ -456,9 +492,14 @@ export const projects: Project[] = [
       github: 'https://github.com/jayp881998/IT-Support-Analytics-Pipeline',
     },
     gallery: [
-      { src: '/projects/it-support-analytics-pipeline/star-schema.png', caption: 'Star schema — ticket fact table with date, agent, requester, group, and channel dimensions.' },
-      { src: '/projects/it-support-analytics-pipeline/dashboard.png', caption: 'Executive overview dashboard (built on synthetic sample data).' },
+      { src: '/projects/it-support-analytics-pipeline/star-schema.png', caption: 'Star schema — ticket fact table with date, agent, requester, group, and channel dimensions.', width: 2556, height: 1655 },
     ],
+    dashboard: {
+      src: '/projects/it-support-analytics-pipeline/dashboard.png',
+      caption: 'Executive overview — built on synthetic sample data.',
+      // Set embedUrl to a Power BI Publish-to-web link to replace the
+      // screenshot with a live, interactive report in the same slot.
+    },
   },
   {
     slug: '211-canada-datathon',

@@ -1,8 +1,9 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { identity, navSections, projects } from '@/content/profile';
 import { useTheme } from '@/components/providers/ThemeProvider';
 import { useScrollLock } from '@/lib/hooks';
@@ -30,8 +31,11 @@ export function CommandPalette() {
   const [query, setQuery] = useState('');
   const [cursor, setCursor] = useState(0);
   const [copied, setCopied] = useState(false);
+  // document.body doesn't exist during SSR — gate the portal to after mount.
+  const [mounted, setMounted] = useState(false);
 
   const router = useRouter();
+  const pathname = usePathname();
   const { toggle } = useTheme();
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
@@ -47,12 +51,19 @@ export function CommandPalette() {
   const goToSection = useCallback(
     (id: string) => {
       close();
+      // These ids only exist on "/" — from a case-study page (or any future
+      // non-home route) there's nothing to scroll to, so navigate home first
+      // and let the browser resolve the hash once that page has mounted.
+      if (pathname !== '/') {
+        router.push(`/#${id}`);
+        return;
+      }
       // Let the dialog unmount before scrolling, or the scroll lock fights it.
       requestAnimationFrame(() => {
         document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     },
-    [close],
+    [close, pathname, router],
   );
 
   const actions = useMemo<Action[]>(() => {
@@ -176,6 +187,8 @@ export function CommandPalette() {
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
+  useEffect(() => setMounted(true), []);
+
   useEffect(() => {
     if (open) requestAnimationFrame(() => inputRef.current?.focus());
   }, [open]);
@@ -218,20 +231,27 @@ export function CommandPalette() {
       >
         <Icon name="search" size={13} />
         <span>Search</span>
-        <kbd className="ml-1 rounded border border-line bg-surface-3 px-1.5 py-0.5 font-mono text-[0.625rem] text-ink-3">
+        <kbd className="ml-1 rounded border border-line bg-surface-3 px-1.5 py-0.5 font-mono text-[0.625rem] text-ink-2">
           ⌘K
         </kbd>
       </button>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            className="fixed inset-0 z-[150] flex items-start justify-center p-4 pt-[12vh]"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
-          >
+      {/* Portaled straight to <body> so the overlay is never a DOM descendant
+          of <Header> — Header applies its own backdrop-blur once scrolled,
+          and an ancestor with a backdrop-filter creates a new containing
+          block that isolates a descendant's own backdrop-filter, silently
+          turning this scrim's blur into a plain dim on every scrolled page. */}
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {open && (
+              <motion.div
+                className="fixed inset-0 z-[150] flex items-start justify-center p-4 pt-[12vh]"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+              >
             <button
               type="button"
               aria-label="Close command palette"
@@ -326,10 +346,12 @@ export function CommandPalette() {
                   opens this
                 </span>
               </div>
-            </motion.div>
-          </motion.div>
+              </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body,
         )}
-      </AnimatePresence>
     </>
   );
 }

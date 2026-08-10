@@ -1,0 +1,39 @@
+name: CI
+
+# Gate for pull requests into main: type-check and a full static build must
+# pass before a branch can merge, so a broken build never reaches the deploy
+# workflow (which only runs on main). Kept separate from deploy.yml — this one
+# has no Pages permissions and never publishes.
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Supersede older runs on the same branch; a stale check is not worth finishing.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # Keep in sync with .nvmrc and deploy.yml.
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type-check
+        run: npm run typecheck
+
+      - name: Build static export
+        run: npm run build

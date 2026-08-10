@@ -26,7 +26,11 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # Pinned to the active LTS. Keep this in sync with .nvmrc so the
+          # cloud build and local dev use the same Node. (Next 15's bundled
+          # webpack does not support Node 24 yet — do not bump past 22 until
+          # a Next upgrade clears that.)
+          node-version: 22
           cache: npm
 
       - name: Install dependencies

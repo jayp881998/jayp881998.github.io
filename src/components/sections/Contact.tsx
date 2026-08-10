@@ -8,14 +8,18 @@ import { Reveal } from '@/components/ui/Reveal';
 import { Section } from '@/components/ui/Section';
 
 /**
- * Optional form endpoint (Formspree, Basin, Web3Forms, …).
+ * Web3Forms access key.
  *
- * The site is a static export, so there is no server to post to. Set
- * NEXT_PUBLIC_FORM_ENDPOINT in .env.local (and in your host's env settings) to
- * enable real submissions. With it unset the form still works — it composes a
- * pre-filled mailto: instead, which never silently drops a message.
+ * The site is a static export, so there is no server to post to — Web3Forms
+ * accepts a direct client-side POST instead. The key is public by design
+ * (Web3Forms scopes abuse by key + origin, not by secrecy); get one free,
+ * no-login, at https://web3forms.com and set
+ * NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY in .env.local (and in your host's env
+ * settings). With it unset the form still works — it composes a pre-filled
+ * mailto: instead, which never silently drops a message.
  */
-const FORM_ENDPOINT = process.env.NEXT_PUBLIC_FORM_ENDPOINT ?? '';
+const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
+const FORM_ENDPOINT = 'https://api.web3forms.com/submit';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
@@ -35,7 +39,7 @@ export function Contact() {
     const email = String(data.get('email') ?? '');
     const message = String(data.get('message') ?? '');
 
-    if (!FORM_ENDPOINT) {
+    if (!WEB3FORMS_ACCESS_KEY) {
       const subject = encodeURIComponent(`Portfolio enquiry from ${name}`);
       const body = encodeURIComponent(`${message}\n\n— ${name}\n${email}`);
       window.location.href = `mailto:${identity.email}?subject=${subject}&body=${body}`;
@@ -85,12 +89,12 @@ export function Contact() {
                 <Icon name={copied ? 'check' : 'mail'} size={16} />
               </span>
               <span className="min-w-0 flex-1">
-                <span className="block text-[0.6875rem] uppercase tracking-wider text-ink-3">
+                <span className="block text-[0.6875rem] uppercase tracking-wider text-ink-kicker">
                   Email
                 </span>
                 <span className="block truncate text-sm text-ink">{identity.email}</span>
               </span>
-              <span className="shrink-0 font-mono text-[0.625rem] text-ink-3">
+              <span className="shrink-0 font-mono text-[0.6875rem] text-ink-3">
                 {copied ? 'copied' : 'copy'}
               </span>
             </button>
@@ -105,7 +109,7 @@ export function Contact() {
                 <Icon name="linkedin" size={15} />
               </span>
               <span className="min-w-0 flex-1">
-                <span className="block text-[0.6875rem] uppercase tracking-wider text-ink-3">
+                <span className="block text-[0.6875rem] uppercase tracking-wider text-ink-kicker">
                   LinkedIn
                 </span>
                 <span className="block truncate text-sm text-ink">in/jaypanchal0808</span>
@@ -123,7 +127,7 @@ export function Contact() {
                 <Icon name="github" size={15} />
               </span>
               <span className="min-w-0 flex-1">
-                <span className="block text-[0.6875rem] uppercase tracking-wider text-ink-3">
+                <span className="block text-[0.6875rem] uppercase tracking-wider text-ink-kicker">
                   GitHub
                 </span>
                 <span className="block truncate text-sm text-ink">jayp881998</span>
@@ -140,7 +144,7 @@ export function Contact() {
                 <Icon name="download" size={15} />
               </span>
               <span className="min-w-0 flex-1">
-                <span className="block text-[0.6875rem] uppercase tracking-wider text-ink-3">
+                <span className="block text-[0.6875rem] uppercase tracking-wider text-ink-kicker">
                   Resume
                 </span>
                 <span className="block truncate text-sm text-ink">Download PDF</span>
@@ -152,6 +156,8 @@ export function Contact() {
         {/* Form */}
         <Reveal delay={0.08}>
           <form onSubmit={onSubmit} className="card p-6 sm:p-7">
+            <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
+
             {/* Honeypot — visually hidden, not display:none, so bots still fill it. */}
             <div className="absolute -left-[9999px]" aria-hidden="true">
               <label htmlFor="company">Company</label>
@@ -180,7 +186,7 @@ export function Contact() {
             <button
               type="submit"
               disabled={status === 'sending'}
-              className="mt-5 inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-ink px-5 text-sm font-medium text-bg transition-transform hover:scale-[1.01] active:scale-95 disabled:opacity-60"
+              className="mt-5 inline-flex h-control w-full items-center justify-center gap-2 rounded-full bg-ink px-5 text-sm font-medium text-bg transition-transform hover:scale-[1.01] active:scale-95 disabled:opacity-60"
             >
               {status === 'sending' ? 'Sending…' : 'Send message'}
               {status !== 'sending' && <Icon name="arrowRight" size={15} />}
@@ -199,7 +205,7 @@ export function Contact() {
                   .
                 </span>
               )}
-              {status === 'idle' && !FORM_ENDPOINT && (
+              {status === 'idle' && !WEB3FORMS_ACCESS_KEY && (
                 <span className="text-ink-3">Opens in your email client.</span>
               )}
             </p>
@@ -234,7 +240,7 @@ function Field({
         type={type}
         required={required}
         autoComplete={autoComplete}
-        className="h-11 w-full rounded-lg border border-line bg-surface-2/60 px-3.5 text-sm text-ink outline-none transition-colors placeholder:text-ink-3 focus:border-accent-line"
+        className="h-control w-full rounded-lg border border-line bg-surface-2/60 px-3.5 text-sm text-ink outline-none transition-colors placeholder:text-ink-3 focus:border-accent-line"
       />
     </div>
   );

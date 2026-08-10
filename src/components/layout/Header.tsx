@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { identity, navSections } from '@/content/profile';
 import { useActiveSection, useScrollLock, useScrolledPast } from '@/lib/hooks';
-import { asset, cn } from '@/lib/utils';
+import { asset, cn, homeAnchor } from '@/lib/utils';
 import { Icon } from '@/components/ui/Icon';
 import { CommandPalette } from '@/components/chrome/CommandPalette';
 import { ThemeToggle } from '@/components/chrome/ThemeToggle';
@@ -44,7 +44,7 @@ export function Header() {
           {navSections.map((section) => (
             <a
               key={section.id}
-              href={`#${section.id}`}
+              href={homeAnchor(section.id)}
               aria-current={active === section.id ? 'true' : undefined}
               className={cn(
                 'relative rounded-full px-3 py-1.5 text-[0.8125rem] transition-colors',
@@ -106,7 +106,7 @@ export function Header() {
               {navSections.map((section) => (
                 <li key={section.id}>
                   <a
-                    href={`#${section.id}`}
+                    href={homeAnchor(section.id)}
                     onClick={() => setMenuOpen(false)}
                     className="flex items-center justify-between border-b border-line py-3 text-sm text-ink-2 last:border-0"
                   >
@@ -119,7 +119,7 @@ export function Header() {
                 <a
                   href={asset(identity.resume)}
                   download=""
-                  className="flex h-11 w-full items-center justify-center gap-2 rounded-full bg-ink text-sm font-medium text-bg"
+                  className="flex h-control w-full items-center justify-center gap-2 rounded-full bg-ink text-sm font-medium text-bg"
                 >
                   <Icon name="download" size={15} />
                   Download resume

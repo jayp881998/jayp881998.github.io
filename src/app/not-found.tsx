@@ -15,11 +15,7 @@ export default function NotFound() {
       <div className="max-w-xl">
         <p className="kicker">Error 404</p>
 
-        <h1 className="figure mt-4 text-6xl font-semibold text-ink sm:text-7xl">
-          <span className="bg-gradient-to-br from-accent-hi via-accent to-violet bg-clip-text text-transparent">
-            404
-          </span>
-        </h1>
+        <h1 className="figure mt-4 text-6xl font-semibold text-accent sm:text-7xl">404</h1>
 
         <p className="mt-5 text-xl font-medium text-ink">This row doesn’t exist in the table.</p>
 
@@ -31,14 +27,14 @@ export default function NotFound() {
         <div className="mt-8 flex flex-wrap gap-2.5">
           <Link
             href="/"
-            className="inline-flex h-11 items-center gap-2 rounded-full bg-ink px-5 text-sm font-medium text-bg transition-transform hover:scale-[1.03] active:scale-95"
+            className="inline-flex h-control items-center gap-2 rounded-full bg-ink px-5 text-sm font-medium text-bg transition-transform hover:scale-[1.03] active:scale-95"
           >
             <Icon name="arrowRight" size={16} />
             Back to the portfolio
           </Link>
           <Link
             href="/#contact"
-            className="inline-flex h-11 items-center gap-2 rounded-full border border-line-strong px-5 text-sm text-ink-2 transition-colors hover:border-accent-line hover:text-ink"
+            className="inline-flex h-control items-center gap-2 rounded-full border border-line-strong px-5 text-sm text-ink-2 transition-colors hover:border-accent-line hover:text-ink"
           >
             Get in touch
           </Link>
