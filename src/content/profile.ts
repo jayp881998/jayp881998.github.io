@@ -129,7 +129,7 @@ export const identity = {
   ],
 
   /** Availability line in the contact section. */
-  availability: 'Open to BI Developer, Data Analyst, and Operations / Inventory Analyst roles in the Greater Toronto Area or remote across Canada.',
+  availability: 'Open to BI Developer, Data Analyst, and Operations / Inventory Analyst roles in the Greater Toronto Area or remote across Canada. Eligible to work in Canada on an open work permit.',
 
   // ‼️ REPLACE — drop your headshot at this exact path (see README > Assets).
   //    Recommended: 800×800 square, JPG or WebP, under 150 KB.
@@ -190,10 +190,10 @@ export const metrics: Metric[] = [
 
 /** Short, factual credibility strip under the hero CTAs. */
 export const quickFacts = [
-  '3+ years in analytics',
+  '5 years professional, 3+ in analytics',
   '2 Canadian post-grads, both with honours',
   'Power BI · T-SQL · Python',
-  'Toronto, ON',
+  'Eligible to work in Canada — open work permit',
 ];
 
 /**
