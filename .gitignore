@@ -42,3 +42,14 @@ yarn-error.log*
 # Delete these two lines if you want the originals tracked as well.
 /Photo.JPG
 /Panchal_Jay_Resume.pdf
+
+# AI tooling / installed design skills — local dev tooling, not versioned with
+# the site. (The impeccable detector's shared config in /.impeccable/config.json
+# IS committed, deliberately — it records accepted design-review deviations.)
+/.agents/
+/.claude/
+/.codex/
+/.github/agents/
+/.github/hooks/
+/.github/skills/
+/skills-lock.json
