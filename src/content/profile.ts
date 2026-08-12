@@ -117,7 +117,7 @@ export const identity = {
   phone: '+1 (437) 430-5325',
 
   /** The 10-second answer. Kept to two sentences on purpose. */
-  headline: 'I build the SQL-to-Power BI reporting that operations and inventory teams actually run on.',
+  headline: 'I build the SQL-to-Power BI reporting that operations and inventory teams run on.',
   subheadline:
     'Mechanical engineer turned BI developer. I own the whole pipeline — API and SQL extraction, warehouse modelling, DAX semantic layers, automated refresh — and I understand the production floor the data is describing.',
 
@@ -191,7 +191,7 @@ export const metrics: Metric[] = [
 /** Short, factual credibility strip under the hero CTAs. */
 export const quickFacts = [
   '5 years professional, 3+ in analytics',
-  '2 Canadian post-grads, both with honours',
+  'Two Canadian postgraduate certificates, with honours',
   'Power BI · T-SQL · Python',
   'Eligible to work in Canada — open work permit',
 ];
