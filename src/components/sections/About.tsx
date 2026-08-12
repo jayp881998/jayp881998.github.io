@@ -8,7 +8,7 @@ export function About() {
     <Section
       id="about"
       kicker="About"
-      title="Mechanical engineer first. That is why the data makes sense to me."
+      title="I came to data from the production floor."
     >
       <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
         <Reveal className="space-y-5">

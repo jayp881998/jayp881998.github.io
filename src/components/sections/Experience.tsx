@@ -14,7 +14,7 @@ export function Experience() {
     <Section
       id="experience"
       kicker="Experience"
-      title="Five years, three countries, one throughline."
+      title="Five years across manufacturing, operations, and inventory."
       lede="Every role has involved the same thing: taking a messy operational reality and turning it into numbers people are willing to act on."
     >
       <ol className="relative">

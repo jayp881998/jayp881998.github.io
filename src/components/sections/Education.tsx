@@ -9,7 +9,7 @@ export function Education() {
     <Section
       id="education"
       kicker="Education & credentials"
-      title="Two Canadian post-grads, both with honours."
+      title="Postgraduate certificates in Data Analytics and Project Management."
     >
       <div className="grid gap-10 lg:grid-cols-[1.25fr_1fr] lg:gap-14">
         {/* Education */}

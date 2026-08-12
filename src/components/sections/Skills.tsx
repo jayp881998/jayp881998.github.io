@@ -8,8 +8,8 @@ export function Skills() {
     <Section
       id="skills"
       kicker="Capabilities"
-      title="What I can be handed on day one."
-      lede="Rated on four named steps rather than invented percentages — and where a tool has a story behind it, the evidence is on the line."
+      title="What I can do on day one."
+      lede="Grouped by area and rated Core to Familiar — with a note on where the rating comes from."
     >
       {/* Legend — the scale has to be legible before the meters mean anything,
           and it keeps the level from ever depending on colour alone. */}
