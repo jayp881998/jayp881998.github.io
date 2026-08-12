@@ -2,6 +2,10 @@
 
 Running record of decisions deferred or rejected during the v2 build, and why — so a later pass doesn't silently re-litigate them or lose the alternative that almost won. Append to this file as new deferrals or rejected-but-viable options come up through the remaining phases (tokens, frontend-design, review passes).
 
+## Post-launch — known optimizations (deferred)
+
+- **Mobile Lighthouse Performance is ~66 (desktop is 100).** Audited on the live site (Lighthouse via local Chrome, 2026-08). Accessibility / Best-Practices / SEO are **100 on both** form factors and CLS is **0**. The mobile gap is entirely **Total Blocking Time (~1,430 ms)** — main-thread JavaScript under Lighthouse's 4×-throttled mobile CPU (Script Evaluation ~2.5s from React hydration + Framer Motion, which nearly every section uses; Style & Layout ~2.3s from the animation/gradient/backdrop-blur density). **Not** network/images/render-blocking — Lighthouse flagged zero of those. The scan-critical content (name, role, headline, metrics) is server-rendered and visible on first paint even on mobile, so this is post-paint interactivity settling, not blocked comprehension; and the audience skews desktop (100). **Fix when revisited:** Framer Motion `LazyMotion` + `m` components (swap `motion.` → `m.` across ~15 files + one `<LazyMotion features={domAnimation}>` provider) — lazy-loads only the used features, cutting the motion runtime ~34kb → ~5kb with zero visual change. Realistic outcome ~low-80s on mobile; a perfect mobile 100 with this animation density under Lighthouse's throttle is not realistically reachable without also thinning the effects. User chose to note-and-defer rather than refactor now.
+
 ## Fixed this session
 
 - **`.grid-plane` decorative background** — the impeccable hook's "codex-grid-background" finding (a hairline-gradient grid tiled by a fixed pixel cell, a generated-UI tell). Removed entirely during `/design-tokens` rather than reworked — see the new deferred item below for what (if anything) replaces it.
