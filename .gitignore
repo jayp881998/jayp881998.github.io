@@ -43,6 +43,12 @@ yarn-error.log*
 /Photo.JPG
 /Panchal_Jay_Resume.pdf
 
+# Internal build notes & v2 design docs — kept local, never published to the
+# public repo. The visitor-facing README.md is the only doc that ships.
+/BUILD_NOTES.local.md
+/Portfolio-v2-Build-Brief.md
+/.design/
+
 # AI tooling / installed design skills — local dev tooling, not versioned with
 # the site. (The impeccable detector's shared config in /.impeccable/config.json
 # IS committed, deliberately — it records accepted design-review deviations.)
