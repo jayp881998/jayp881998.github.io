@@ -270,7 +270,7 @@ export function CommandPalette() {
               onKeyDown={onKeyDown}
               className="glass relative w-full max-w-xl overflow-hidden rounded-2xl shadow-[var(--shadow-lift)]"
             >
-              <div className="flex items-center gap-3 border-b border-line px-4">
+              <div className="cmd-search-row flex items-center gap-3 border-b border-line px-4 transition-colors">
                 <Icon name="search" size={16} className="text-ink-3" />
                 <input
                   ref={inputRef}
@@ -278,7 +278,7 @@ export function CommandPalette() {
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Jump to a section, case study, or contact…"
                   aria-label="Search commands"
-                  className="h-13 w-full bg-transparent py-4 text-sm text-ink outline-none placeholder:text-ink-3"
+                  className="cmd-search-input h-13 w-full bg-transparent py-4 text-sm text-ink outline-none placeholder:text-ink-3"
                 />
                 <kbd className="hidden rounded border border-line bg-surface-3 px-1.5 py-0.5 font-mono text-[0.625rem] text-ink-3 sm:block">
                   esc

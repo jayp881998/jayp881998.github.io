@@ -191,6 +191,20 @@ p {
   border-radius: 6px;
 }
 
+/* The command-palette search field is auto-focused and sits flush against the
+   dialog's rounded, overflow-clipped top edge — where the offset ring above
+   would be sliced off along the top. It's the only field in the modal and
+   shows a caret; the search row's accent underline on focus is the cue
+   instead. (Higher specificity than the rule above, so it wins.) */
+.cmd-search-input:focus-visible {
+  outline: none;
+}
+/* …and the non-clipping focus cue: the row's bottom hairline turns accent
+   while the field is focused. */
+.cmd-search-row:focus-within {
+  border-color: var(--accent-line);
+}
+
 /* Skip link — first tab stop on the page. */
 .skip-link {
   position: fixed;
