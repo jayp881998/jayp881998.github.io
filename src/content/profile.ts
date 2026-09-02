@@ -111,7 +111,7 @@ export type Education = {
 export const identity = {
   name: 'Jay Panchal',
   /** Shown under the name in the hero. Your positioning in five words or fewer. */
-  title: 'BI Developer · Operations & Inventory Analyst',
+  title: 'BI Developer · Data & Operations Analyst',
   location: 'Toronto, ON, Canada',
   email: 'panchaljay0808@gmail.com',
   phone: '+1 (437) 430-5325',
@@ -709,14 +709,13 @@ export const navSections = [
 export const seo = {
   title: `${identity.name} — ${identity.title}`,
   description:
-    'Jay Panchal is a Toronto-based BI developer and operations & inventory analyst. Power BI, T-SQL, Python, and star-schema warehousing — pipelines that replaced 20 hours of manual reporting a week.',
+    'Jay Panchal is a Toronto-based BI developer and data & operations analyst. Power BI, T-SQL, Python, and star-schema warehousing — pipelines that replaced 20 hours of manual reporting a week.',
   keywords: [
     'BI Developer',
     'Business Intelligence Analyst',
     'Data Analyst Toronto',
     'Power BI Developer',
     'Operations Analyst',
-    'Inventory Analyst',
     'SQL Server',
     'DAX',
     'Star Schema',
