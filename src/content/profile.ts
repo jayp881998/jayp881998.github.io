@@ -117,7 +117,7 @@ export const identity = {
   phone: '+1 (437) 430-5325',
 
   /** The 10-second answer. Kept to two sentences on purpose. */
-  headline: 'I build the SQL-to-Power BI reporting that operations and inventory teams run on.',
+  headline: 'I build the SQL-to-Power BI reporting that operations teams run on.',
   subheadline:
     'Mechanical engineer turned BI developer. I own the whole pipeline — API and SQL extraction, warehouse modelling, DAX semantic layers, automated refresh — and I understand the production floor the data is describing.',
 

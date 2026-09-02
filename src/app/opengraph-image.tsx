@@ -72,7 +72,7 @@ export default function OpenGraphImage() {
             maxWidth: 960,
           }}
         >
-          I build the SQL-to-Power BI reporting that operations and inventory teams run on.
+          I build the SQL-to-Power BI reporting that operations teams run on.
         </div>
 
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
